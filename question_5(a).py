@@ -7,7 +7,7 @@ import math
 def ellipsoid(x, y):
     # Ensure the argument of sqrt is non-negative
     z_squared = 18 - x**2 - 4*y**2
-    z_squared = np.clip(z_squared, 0, None)  # Clip negative values to 0
+    z_squared = np.clip(z_squared, 0, None)  #Only real values are valid, so use np.clip() to prevent square roots of negative numbers.
     return np.sqrt(z_squared)
 
 # Define the tangent plane
