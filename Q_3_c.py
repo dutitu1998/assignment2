@@ -1,14 +1,16 @@
-import sympy as sp
-
-t=sp.symbols('t',real=True)
-
-x=sp.cos(t)
-y=sp.sin(t)
-z=sp.tan(t)
-
-w=sp.sqrt((x**2)+(y**2)+(z**2))
-
-w_diff=w.diff(t)
-print(w_diff)
-t0=sp.pi/4
-print(w_diff.subs(t,t0).evalf()) #t0 value will be used in t 
+import numpy as np
+def compute_dw_dtheta(theta):
+    x = np.cos(theta)
+    y = np.sin(theta)
+    z = np.tan(theta)
+    
+    dw_dx = x / np.sqrt(x**2 + y**2 + z**2)
+    dw_dy = y / np.sqrt(x**2 + y**2 + z**2)
+    dw_dz = z / np.sqrt(x**2 + y**2 + z**2)
+    
+    dx_dtheta = -np.sin(theta)
+    dy_dtheta = np.cos(theta)
+    dz_dtheta = 1 / (np.cos(theta)**2)
+    
+    return dw_dx * dx_dtheta + dw_dy * dy_dtheta + dw_dz * dz_dtheta
+print(f"the value is",compute_dw_dtheta(np.pi/4))
